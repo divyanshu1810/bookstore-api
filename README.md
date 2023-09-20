@@ -2,15 +2,19 @@
 This is a simple CRUD (Create, Read, Update, Delete) API project built in Go that manages a bookstore. It uses MongoDB as the backend database to store and retrieve book information.
 
 ## Create Book:
-![Screenshot (693)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/52b36927-1daa-42d9-b6e6-a504c9170f7f)
+![Screenshot (693)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/dc44944e-f372-47fc-a6f0-5985e0e3b131)
+
 ## Get all books:
-![Screenshot (694)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/3753ffc9-9ecd-40c4-ae08-b2de26e29746)
+![Screenshot (694)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/48dee68f-4330-4941-b615-bd816623b64f)
+
 ## Get a book by its ID:
-![Screenshot (695)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/edd6dcb6-afe2-4180-864c-e901c16ceab4)
+![Screenshot (695)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/1f417d70-3de4-40c9-8962-6b76ab8f6452)
+
 ## Update a Book by its ID:
-![Screenshot (696)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/66d06be0-34f1-45f9-9a17-d02d3e4e52b0)
+![Screenshot (696)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/0828f98c-52b1-4710-bba0-449a31403baa)
+
 ## Delete a book by its ID:
-![Screenshot (697)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/dc88fabb-e577-48bb-aa92-7be21e3d4bc9)
+![Screenshot (697)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/7d95a9e4-f66f-4380-9fe1-65f0a7922d3b)
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to help improve this project.
