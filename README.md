@@ -12,9 +12,9 @@ This is a simple CRUD (Create, Read, Update, Delete) API project built in Go tha
 ## Delete a book by its ID:
 ![Screenshot (697)](https://github.com/divyanshu1810/bookstore-api/assets/91051053/dc88fabb-e577-48bb-aa92-7be21e3d4bc9)
 
-Contributing
+## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to help improve this project.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
