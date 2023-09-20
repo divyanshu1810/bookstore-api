@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/divyanshu1810/bookstore-api/routes"
 	"github.com/gorilla/mux"
-	"github.com/yourusername/bookstore-api/routes"
 )
 
 func main() {

@@ -1,13 +1,14 @@
 package handlers
 
 import (
-	"encoding/json"
-	"net/http"
-	"github.com/gorilla/mux"
-	"github.com/divyanshu1810/bookstore-api/models"
-	"github.com/divyanshu1810/bookstore-api/database"
 	"context"
+	"encoding/json"
 	"fmt"
+	"net/http"
+
+	"github.com/divyanshu1810/bookstore-api/database"
+	"github.com/divyanshu1810/bookstore-api/models"
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )

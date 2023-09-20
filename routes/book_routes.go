@@ -2,7 +2,7 @@ package book_routes
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/yourusername/bookstore-api/handlers"
+	"github.com/divyanshu1810/bookstore-api/controllers"
 )
 
 func InitializeBookRoutes(router *mux.Router) {
