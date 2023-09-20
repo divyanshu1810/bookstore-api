@@ -1,8 +1,8 @@
 package routes
 
 import (
+	"github.com/divyanshu1810/bookstore-api/routes/book_routes"
 	"github.com/gorilla/mux"
-	"github.com/yourusername/bookstore-api/routes/book_routes"
 )
 
 func InitializeRoutes(router *mux.Router) {
