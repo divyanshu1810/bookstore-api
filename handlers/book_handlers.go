@@ -6,15 +6,17 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/divyanshu1810/bookstore-api/database"
-	"github.com/divyanshu1810/bookstore-api/models"
+	"bookstore-api/database"
+
+	"bookstore-api/models"
+
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func GetBooks(w http.ResponseWriter, r *http.Request) {
-	// Get all books from the MongoDB collection
+
 	cur, err := database.BooksCollection.Find(context.TODO(), bson.M{})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -33,7 +35,22 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 		books = append(books, book)
 	}
 
-	json.NewEncoder(w).Encode(books)
+	response := struct {
+		Data []models.Book `json:"data"`
+	}{
+		Data: books,
+	}
+
+	jsonData, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }
 
 func GetBook(w http.ResponseWriter, r *http.Request) {
@@ -44,7 +61,6 @@ func GetBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Find a book by ID in the MongoDB collection
 	var book models.Book
 	err = database.BooksCollection.FindOne(context.TODO(), bson.M{"_id": id}).Decode(&book)
 	if err != nil {
@@ -52,21 +68,50 @@ func GetBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	json.NewEncoder(w).Encode(book)
+	response := struct {
+		Data models.Book `json:"data"`
+	}{
+		Data: book,
+	}
+
+	jsonData, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }
 
 func CreateBook(w http.ResponseWriter, r *http.Request) {
 	var book models.Book
 	_ = json.NewDecoder(r.Body).Decode(&book)
 
-	// Insert the book into the MongoDB collection
 	result, err := database.BooksCollection.InsertOne(context.TODO(), book)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	json.NewEncoder(w).Encode(result.InsertedID)
+	response := struct {
+		ID string `json:"id"`
+	}{
+		ID: result.InsertedID.(primitive.ObjectID).Hex(),
+	}
+
+	jsonData, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	w.WriteHeader(http.StatusCreated)
+	w.Write(jsonData)
 }
 
 func UpdateBook(w http.ResponseWriter, r *http.Request) {
@@ -80,14 +125,28 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	var updatedBook models.Book
 	_ = json.NewDecoder(r.Body).Decode(&updatedBook)
 
-	// Update the book in the MongoDB collection
 	_, err = database.BooksCollection.UpdateOne(context.TODO(), bson.M{"_id": id}, bson.M{"$set": updatedBook})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	json.NewEncoder(w).Encode(updatedBook)
+	response := struct {
+		Message string `json:"message"`
+	}{
+		Message: "Book updated successfully",
+	}
+
+	jsonData, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }
 
 func DeleteBook(w http.ResponseWriter, r *http.Request) {
@@ -98,12 +157,26 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Delete the book from the MongoDB collection
 	_, err = database.BooksCollection.DeleteOne(context.TODO(), bson.M{"_id": id})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	fmt.Fprintf(w, "Book with ID %s has been deleted", id.Hex())
+	response := struct {
+		Message string `json:"message"`
+	}{
+		Message: fmt.Sprintf("Book with ID %s has been deleted", id.Hex()),
+	}
+
+	jsonData, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }

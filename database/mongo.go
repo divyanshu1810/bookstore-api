@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"log"
 	"time"
+
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 var client *mongo.Client
 var ctx context.Context
+var BooksCollection *mongo.Collection
 
 func init() {
 	ctx, _ = context.WithTimeout(context.Background(), 10*time.Second)
@@ -26,6 +28,6 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	BooksCollection = client.Database("books").Collection("books_name")
 	fmt.Println("Connected to MongoDB")
 }

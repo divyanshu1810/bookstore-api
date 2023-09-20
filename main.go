@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/divyanshu1810/bookstore-api/routes"
+	"bookstore-api/routes"
+
 	"github.com/gorilla/mux"
 )
 
